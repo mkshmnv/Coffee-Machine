@@ -5,29 +5,20 @@ val COFFEE_MACHINE = CoffeeMachine()
 fun main() {
     startDisplay()
     val cupOfCoffee = CupOfCoffee()
-    cupOfCoffee.howManyCups(enterQuantity())
-    println(cupsOfCoffee(cupOfCoffee))
+    val qtyRequest = enterQuantity()
 
-//    if (COFFEE_MACHINE.water < cupOfCoffee.water &&
-//        COFFEE_MACHINE.milk < cupOfCoffee.milk &&
-//        COFFEE_MACHINE.coffee < cupOfCoffee.coffee) {
-//        println("No, I can make only __0enter number of cups__ cups of coffee")
-//    } else if (COFFEE_MACHINE.water >= cupOfCoffee.water &&
-//        COFFEE_MACHINE.milk >= cupOfCoffee.milk &&
-//        COFFEE_MACHINE.coffee >= cupOfCoffee.coffee ) {
-//        print("Yes, I can make that amount of coffee")
-//
-//        if (COFFEE_MACHINE.water >= cupOfCoffee.water * 2 &&
-//            COFFEE_MACHINE.milk >= cupOfCoffee.milk  * 2 &&
-//            COFFEE_MACHINE.coffee >= cupOfCoffee.coffee * 2) {
-//            print(" (and even N more than that)")
-//        }
-//
-//    }
+    val makeCups = makeCupsOfCoffee(cupOfCoffee)
 
-//    val cupsForParty = Cup()
-//    cupsForParty.calculate(cups)
-//    display(cupsForParty.qty, cupsForParty.water, cupsForParty.milk, cupsForParty.coffee)
+    println(makeCups)
+
+    if (qtyRequest > makeCups) {
+        println("No, I can make only $makeCups cups of coffee")
+    } else {
+        print("Yes, I can make that amount of coffee")
+        if (qtyRequest < makeCups) {
+            print(" (and even ${makeCups - qtyRequest} more than that)")
+        }
+    }
 }
 
 // Make super class Cup, in future can create any drinks
@@ -54,15 +45,17 @@ class CupOfCoffee() : Cup() {
 }
 
 // Calculate how many cups can make
-fun cupsOfCoffee(cup: CupOfCoffee): Int = if ( COFFEE_MACHINE.water < cup.water &&
-    COFFEE_MACHINE.milk < cup.milk &&
-    COFFEE_MACHINE.coffee < cup.coffee ) {
-    0
-} else {
-    val list = listOf(COFFEE_MACHINE.water / cup.water,
-        COFFEE_MACHINE.milk / cup.milk,
-        COFFEE_MACHINE.coffee / cup.coffee).sorted()
-    list[0]
+fun makeCupsOfCoffee(cup: CupOfCoffee): Int {
+    var cups = 0
+    while (COFFEE_MACHINE.water > cup.water &&
+        COFFEE_MACHINE.milk > cup.milk &&
+        COFFEE_MACHINE.coffee > cup.coffee) {
+        cups += 1
+        COFFEE_MACHINE.water -= cup.water
+        COFFEE_MACHINE.milk -= cup.milk
+        COFFEE_MACHINE.coffee -= cup.coffee
+    }
+    return cups
 }
 
 class CoffeeMachine() {
