@@ -6,22 +6,6 @@ var MENU_CHOICE = ""
 fun main() {
     display()
     menu()
-//    startDisplay()
-//    val cupOfCoffee = CupOfCoffee()
-//    val qtyRequest = enterQuantity()
-//
-//    val makeCups = makeCupsOfCoffee(cupOfCoffee)
-//
-//    println(makeCups)
-//
-//    if (qtyRequest > makeCups) {
-//        println("No, I can make only $makeCups cups of coffee")
-//    } else {
-//        print("Yes, I can make that amount of coffee")
-//        if (qtyRequest < makeCups) {
-//            print(" (and even ${makeCups - qtyRequest} more than that)")
-//        }
-//    }
 }
 
 // Make super class Cup, in future can create any drinks
@@ -58,42 +42,12 @@ class Cappuccino() : CupOfCoffee() {
     override var cost = 6
 }
 
-// Calculate how many cups can make
-//fun makeCupsOfCoffee(cup: CupOfCoffee): Int {
-//    var cups = 0
-//    while (COFFEE_MACHINE.water > cup.water &&
-//        COFFEE_MACHINE.milk > cup.milk &&
-//        COFFEE_MACHINE.coffee > cup.coffee) {
-//        cups += 1
-//        COFFEE_MACHINE.water -= cup.water
-//        COFFEE_MACHINE.milk -= cup.milk
-//        COFFEE_MACHINE.coffee -= cup.coffee
-//    }
-//    return cups
-//}
-
 class CoffeeMachine() {
     var water = 400
     var milk = 540
     var coffee = 120
     var cups = 9
     var money = 550
-}
-
-fun startDisplay() {
-    println("Write how many ml of water the coffee machine has:")
-    COFFEE_MACHINE.water = readln().toInt()
-
-    println("Write how many ml of milk the coffee machine has:")
-    COFFEE_MACHINE.milk = readln().toInt()
-
-    println("Write how many grams of coffee beans the coffee machine has:")
-    COFFEE_MACHINE.coffee = readln().toInt()
-}
-
-fun enterQuantity() : Int {
-    println("Write how many cups of coffee you will need:")
-    return readln().toInt()
 }
 
 fun display() {
@@ -154,7 +108,17 @@ fun buy() {
 
 // Function of
 fun fill() {
-    println("fun fill")
+    println("Write how many ml of water you want to add:")
+    COFFEE_MACHINE.water += readln().toInt()
+
+    println("Write how many ml of milk you want to add:")
+    COFFEE_MACHINE.milk += readln().toInt()
+
+    println("Write how many grams of coffee beans you want to add:")
+    COFFEE_MACHINE.coffee += readln().toInt()
+
+    println("Write how many disposable cups you want to add: ")
+    COFFEE_MACHINE.cups += readln().toInt()
 }
 
 // Function collection of money and update balances
