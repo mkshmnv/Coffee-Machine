@@ -25,41 +25,52 @@ fun main() {
 }
 
 // Make super class Cup, in future can create any drinks
-open class Cup() {
+open class CupOfCoffee() {
     open var water = 0
-
+    open var milk = 0
+    open var coffee = 0
+    open var cost = 0
+    var cup = 1
     open fun howManyCups(qty: Int = 0) {
         water *= qty
     }
 }
 
-// Make subclass coffee cup,
-// with ingredients to coffee
-// and calculate how many ingredients needed to any quantity's cups
-class CupOfCoffee() : Cup() {
+// Make subclass tape of coffee, with ingredients to coffee
+class Espresso() : CupOfCoffee() {
+    override var water = 250
+    override var milk = 0
+    override var coffee = 16
+    override var cost = 4
+}
+
+class Latte() : CupOfCoffee() {
+    override var water = 350
+    override var milk = 75
+    override var coffee = 20
+    override var cost = 7
+}
+
+class Cappuccino() : CupOfCoffee() {
     override var water = 200
-    var milk = 50
-    var coffee = 15
-    override fun howManyCups(qty: Int) {
-        water *= qty
-        milk *= qty
-        coffee *= qty
-    }
+    override var milk = 100
+    override var coffee = 12
+    override var cost = 6
 }
 
 // Calculate how many cups can make
-fun makeCupsOfCoffee(cup: CupOfCoffee): Int {
-    var cups = 0
-    while (COFFEE_MACHINE.water > cup.water &&
-        COFFEE_MACHINE.milk > cup.milk &&
-        COFFEE_MACHINE.coffee > cup.coffee) {
-        cups += 1
-        COFFEE_MACHINE.water -= cup.water
-        COFFEE_MACHINE.milk -= cup.milk
-        COFFEE_MACHINE.coffee -= cup.coffee
-    }
-    return cups
-}
+//fun makeCupsOfCoffee(cup: CupOfCoffee): Int {
+//    var cups = 0
+//    while (COFFEE_MACHINE.water > cup.water &&
+//        COFFEE_MACHINE.milk > cup.milk &&
+//        COFFEE_MACHINE.coffee > cup.coffee) {
+//        cups += 1
+//        COFFEE_MACHINE.water -= cup.water
+//        COFFEE_MACHINE.milk -= cup.milk
+//        COFFEE_MACHINE.coffee -= cup.coffee
+//    }
+//    return cups
+//}
 
 class CoffeeMachine() {
     var water = 400
@@ -94,7 +105,7 @@ fun display() {
             "$${COFFEE_MACHINE.money} of money"
     )
 }
-// Make menu
+// Implementation request menu
 fun menu() {
     println("\nWrite action (buy, fill, take):")
     MENU_CHOICE = readln()
@@ -109,21 +120,47 @@ fun menu() {
     display()
 }
 
+// Function of sell coffee, balance calculation and update balances
 fun buy() {
     println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:")
     when (readln().toInt()) {
-        1 -> println("espresso\n")
-        2 -> println("latte\n")
-        3 -> println("cappuccino\n")
+        1 -> {
+            val cupOfEspresso = Espresso()
+            COFFEE_MACHINE.water -= cupOfEspresso.water
+            COFFEE_MACHINE.milk -= cupOfEspresso.milk
+            COFFEE_MACHINE.coffee -= cupOfEspresso.coffee
+            COFFEE_MACHINE.cups -= cupOfEspresso.cup
+            COFFEE_MACHINE.money += cupOfEspresso.cost
+        }
+        2 -> {
+            val cupOfLatte = Latte()
+            COFFEE_MACHINE.water -= cupOfLatte.water
+            COFFEE_MACHINE.milk -= cupOfLatte.milk
+            COFFEE_MACHINE.coffee -= cupOfLatte.coffee
+            COFFEE_MACHINE.cups -= cupOfLatte.cup
+            COFFEE_MACHINE.money += cupOfLatte.cost
+        }
+        3 -> {
+            val cupOfCappuccino = Cappuccino()
+            COFFEE_MACHINE.water -= cupOfCappuccino.water
+            COFFEE_MACHINE.milk -= cupOfCappuccino.milk
+            COFFEE_MACHINE.coffee -= cupOfCappuccino.coffee
+            COFFEE_MACHINE.cups -= cupOfCappuccino.cup
+            COFFEE_MACHINE.money += cupOfCappuccino.cost
+        }
     }
+    println("")
 }
 
+// Function of
 fun fill() {
     println("fun fill")
 }
 
+// Function collection of money and update balances
 fun take() {
-    println("fun take")
+    println("I gave you $${COFFEE_MACHINE.money}\n")
+    COFFEE_MACHINE.money = 0
 }
 
 
