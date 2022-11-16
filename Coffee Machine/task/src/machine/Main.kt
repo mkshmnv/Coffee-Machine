@@ -22,7 +22,7 @@ open class CupOfCoffee {
     var cup = 1
 }
 
-// Make a few subclasses tape of coffee, with ingredients to coffee
+// Make a few subclasses type of coffee, with ingredients to coffee
 class Espresso : CupOfCoffee() {
     override var water = 250
     override var milk = 0
@@ -58,10 +58,8 @@ fun remaining() {
 // Menu coffee machine
 fun menu() {
     println("Write action (buy, fill, take, remaining, exit):")
-    // This var need for implementation possibility of back
-    var action = readln()
 
-    when (action) {
+    when (readln()) {
         // Buy a coffee
         "buy" -> {
             println("")
@@ -89,7 +87,7 @@ fun menu() {
             menu()
         }
         // Pick up money
-        "exit" -> action = ""
+        "exit" -> {}
     }
 }
 
@@ -134,7 +132,7 @@ fun buy() {
             val cupOfCappuccino = Cappuccino()
             checkResources(cupOfCappuccino)
         }
-        "back" -> ""
+        "back" -> {}
     }
     println("")
 }
