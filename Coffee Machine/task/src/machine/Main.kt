@@ -2,12 +2,10 @@ package machine
 
 val COFFEE_MACHINE = CoffeeMachine()
 
-fun main() {
-    menu()
-}
+fun main() = menu()
 
 // Create main class with default resources
-class CoffeeMachine() {
+class CoffeeMachine {
     var water = 400
     var milk = 540
     var coffee = 120
@@ -16,7 +14,7 @@ class CoffeeMachine() {
 }
 
 // Make super class Cup, in future can create any drinks
-open class CupOfCoffee() {
+open class CupOfCoffee {
     open var water = 0
     open var milk = 0
     open var coffee = 0
@@ -25,21 +23,21 @@ open class CupOfCoffee() {
 }
 
 // Make a few subclasses tape of coffee, with ingredients to coffee
-class Espresso() : CupOfCoffee() {
+class Espresso : CupOfCoffee() {
     override var water = 250
     override var milk = 0
     override var coffee = 16
     override var cost = 4
 }
 
-class Latte() : CupOfCoffee() {
+class Latte : CupOfCoffee() {
     override var water = 350
     override var milk = 75
     override var coffee = 20
     override var cost = 7
 }
 
-class Cappuccino() : CupOfCoffee() {
+class Cappuccino : CupOfCoffee() {
     override var water = 200
     override var milk = 100
     override var coffee = 12
